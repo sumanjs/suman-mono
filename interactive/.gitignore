@@ -1,0 +1,13 @@
+
+### folders
+node_modules
+.idea
+.nyc_output
+coverage
+
+
+### matching files
+*.log
+
+### files
+*.DS_Store

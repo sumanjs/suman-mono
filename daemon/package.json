@@ -1,0 +1,43 @@
+{
+  "name": "suman-daemon",
+  "version": "0.0.1006",
+  "description": "Suman daemon worker process pool and more",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "suman test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanjs/suman-daemon.git"
+  },
+  "keywords": [
+    "suman",
+    "sumanjs",
+    "testing",
+    "e2e",
+    "daemon",
+    "worker",
+    "performance-testing",
+    "developer-experience",
+    "dev-ex",
+    "dx"
+  ],
+  "author": "Olegzandr VD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sumanjs/suman-daemon/issues"
+  },
+  "homepage": "https://github.com/sumanjs/suman-daemon#readme",
+  "dependencies": {
+    "@oresoftware/json-stream-parser": "latest",
+    "forever": "^0.15.3",
+    "poolio": "latest",
+    "residence": "latest",
+    "suman-utils": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.81"
+  }
+}

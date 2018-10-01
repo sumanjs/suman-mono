@@ -1,0 +1,52 @@
+{
+  "name": "suman-r",
+  "version": "0.0.1005",
+  "description": "Suman reporter CLI / writable pipe",
+  "bin": {
+    "suman-r": "cli/cli.js",
+    "suman-refine": "cli/cli.js",
+    "suman+": "cli/cli.js",
+    "suman-r-inspect": "cli/inspect.sh"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "test": "suman test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanjs/suman-r.git"
+  },
+  "keywords": [
+    "suman",
+    "sumanjs",
+    "testing",
+    "tap",
+    "TAP",
+    "streaming",
+    "pipe",
+    "text"
+  ],
+  "author": "Olegzandr VD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sumanjs/suman-r/issues"
+  },
+  "homepage": "https://github.com/sumanjs/suman-r#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "dashdash": "^1.14.1",
+    "json-stdio": "latest",
+    "lodash": "^4.17.4",
+    "residence": "latest",
+    "suman-events": "latest",
+    "suman-reporters": "latest",
+    "suman-utils": "latest",
+    "tap-json-parser": "latest"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.85",
+    "@types/node": "^8.0.28"
+  }
+}

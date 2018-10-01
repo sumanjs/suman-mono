@@ -1,0 +1,20 @@
+{
+  "linkToItself": true,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "comments": [],
+  "list": [
+    "residence",
+    "json-stdio",
+    "suman-events",
+    "suman-types",
+    "suman-reporters",
+    "suman-utils",
+    "tap-json-parser"
+  ]
+}

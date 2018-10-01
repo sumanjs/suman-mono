@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - '10'
+  - '9'
+  - '8'
+  - '7'
+  - '6'
+env:
+  - CXX=g++-4.8
+cache:
+  directories:
+    - $HOME/.npm
+    - node_modules
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+
+before_install: 'if [[ `npm -v` != 4* ]]; then npm i -g npm@4; fi'
+install:
+  - npm install
+script: 'npm install istanbul && npm link && npm link suman && suman test/src/es5-es6/a.js'
+after_script: 'npm install coveralls && cat coverage/lcov.info | ./node_modules/.bin/coveralls'
+notifications:
+  email: false
+  slack:
+    rooms:
+      - sumanjs:gvauyHh80cuzpV5v8LlQOAcI#travis-ci

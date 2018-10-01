@@ -1,0 +1,21 @@
+
+### folders
+test
+scripts
+.idea
+node_modules
+src
+
+### matching
+*.ts
+*.md
+*.txt
+*.json
+*.log
+*.yml
+
+### files
+.npmignore
+.gitignore
+
+

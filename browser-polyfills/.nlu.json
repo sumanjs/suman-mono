@@ -1,0 +1,14 @@
+{
+  "npm-link-up":true,
+  "linkToItself": false,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "list": [
+    "suman-types"
+  ]
+}

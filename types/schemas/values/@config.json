@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "IAtRun": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "env": {
+          "$ref": "#/definitions/IEnv"
+        },
+        "plugin": {
+          "$ref": "#/definitions/IPlugin"
+        }
+      },
+      "type": "object"
+    },
+    "IAtTransform": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "env": {
+          "$ref": "#/definitions/IEnv"
+        },
+        "plugin": {
+          "$ref": "#/definitions/IPlugin"
+        }
+      },
+      "type": "object"
+    },
+    "IEnv": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "IPlugin": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "properties": {
+    "@run": {
+      "$ref": "#/definitions/IAtRun"
+    },
+    "@transform": {
+      "$ref": "#/definitions/IAtTransform"
+    },
+    "comment": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}
+

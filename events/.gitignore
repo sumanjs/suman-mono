@@ -1,0 +1,19 @@
+
+### Folders
+logs
+coverage
+.nyc_output
+node_modules
+.idea
+.vscode
+dist/*
+
+### matching
+*.log
+
+### files
+package-lock.json
+yarn.lock
+!dist/README.md
+
+

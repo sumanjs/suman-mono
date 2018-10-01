@@ -1,0 +1,19 @@
+
+### folders
+.idea
+node_modules
+coverage
+.vscode
+dist
+
+
+### matching
+*.log
+
+### files
+package-lock.json
+yarn.lock
+
+### inverse
+!dist/readme.md
+!dist/README.md

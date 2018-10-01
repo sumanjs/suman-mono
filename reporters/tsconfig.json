@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "declaration": true,
+    "baseUrl": ".",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/suman-types/dts"
+    ],
+    "target": "es6",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "allowUnreachableCode": true,
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017"
+    ]
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "test",
+    "node_modules"
+  ]
+}

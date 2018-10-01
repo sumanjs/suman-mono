@@ -1,0 +1,27 @@
+### folders
+node_modules
+coverage
+.idea
+test
+scripts
+dist
+.vscode
+
+### files
+package-lock.json
+yarn.lock
+
+### matching
+*.DS_Store
+*.log
+*.md
+*.json
+*.yml
+*.txt
+*.sh
+
+### negation
+!dist/readme.md
+
+
+

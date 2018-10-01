@@ -1,0 +1,14 @@
+{
+  "linkToItself": false,
+  "comments": [],
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "list": [
+    "suman-browser-polyfills"
+  ]
+}

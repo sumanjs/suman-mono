@@ -1,0 +1,12 @@
+
+### folders
+.idea
+node_modules
+dist
+.vscode
+
+### matching
+*.log
+
+### negation
+!dist/README.md

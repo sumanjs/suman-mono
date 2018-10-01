@@ -1,0 +1,25 @@
+
+### folders
+node_modules
+.idea
+scripts
+test
+src
+
+### matching
+*.txt
+*.md
+*.json
+*.yml
+*.log
+
+### files
+.editorconfig
+suman.conf.js
+.npmignore
+.gitignore
+yarn.lock
+
+
+
+

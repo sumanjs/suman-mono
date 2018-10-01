@@ -1,0 +1,12 @@
+### folders
+node_modules
+.idea
+.nyc_output
+coverage
+
+### matching files
+*.log
+
+### files
+yarn.lock
+*.DS_Store

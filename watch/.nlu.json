@@ -1,0 +1,25 @@
+{
+  "linkToItself": true,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "list": [
+    "residence",
+    "prepend-transform",
+    "poolio",
+    
+    "suman-utils",
+    "suman-events",
+    "suman-debug",
+    "suman-browser-polyfills",
+    "suman-types",
+
+    "suman-watch-plugins",
+    "suman-transform-plugins",
+    "suman-run-plugins"
+  ]
+}

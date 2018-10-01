@@ -1,0 +1,42 @@
+{
+  "name": "suman-tools",
+  "version": "0.0.107",
+  "description": "Special command line tools to aid with @transform.sh and @run.sh files.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "suman-tools": "dist/index.js"
+  },
+  "scripts": {
+    "test": "suman test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanjs/suman-tools.git"
+  },
+  "keywords": [
+    "suman",
+    "testing",
+    "cli",
+    "tools",
+    "command",
+    "line",
+    "stdout",
+    "stderr"
+  ],
+  "author": "Olegzandr VD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sumanjs/suman-tools/issues"
+  },
+  "homepage": "https://github.com/sumanjs/suman-tools#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "dashdash": "^1.14.1",
+    "residence": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^10.1.4"
+  }
+}

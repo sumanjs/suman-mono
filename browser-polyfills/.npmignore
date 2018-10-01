@@ -1,0 +1,18 @@
+
+### folders
+.idea
+test
+scripts
+node_modules
+
+### matching
+*.log
+*.md
+*.txt
+*.json
+
+### files
+.babelrc
+.npmignore
+.gitignore
+

@@ -1,0 +1,43 @@
+{
+  "npm-link-up": true,
+  "linkToItself": true,
+  "alwaysReinstall": false,
+  "alwaysRelink": false,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/",
+    "/dell-xps-backup/"
+  ],
+  "comments": [
+    "put any comment you want here"
+  ],
+  "list": [
+    "vamoot",
+    "proxy-mcproxy",
+    "prepend-transform",
+    "log-prepend",
+    "pragmatik",
+    "frankenstop",
+    "residence",
+    "poolio",
+    "freeze-existing-props",
+    "json-stdio",
+    "suman-r",
+    "suman-types",
+    "suman-browser",
+    "suman-watch",
+    "suman-shell",
+    "suman-utils",
+    "suman-events",
+    "suman-daemon",
+    "suman-browser-polyfills",
+    "suman-watch-plugins",
+    "suman-run-plugins",
+    "suman-transform-plugins",
+    "suman-reporters",
+    "suman-interactive"
+  ]
+}

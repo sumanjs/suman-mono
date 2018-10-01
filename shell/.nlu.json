@@ -1,0 +1,21 @@
+{
+  "linkToItself": true,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "comments": [
+
+  ],
+  "list": [
+    "poolio",
+    "json-stdio",
+    "prepend-transform",
+    "suman-types",
+    "suman-utils",
+    "suman-browser-polyfills"
+  ]
+}

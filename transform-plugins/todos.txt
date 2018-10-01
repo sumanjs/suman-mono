@@ -1,0 +1,8 @@
+create babel-std transform
+
+test should use a compatible plugin from the list of compatible plugins
+and run some tests against that.
+
+A transform plugin needs to have at least one run plugin that it is compatible with.
+
+create BATS test with bash

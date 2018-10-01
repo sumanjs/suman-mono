@@ -1,0 +1,16 @@
+### folders
+.idea
+node_modules
+coverage
+.nyc_output
+.vscode
+dist
+
+### matching
+*.log
+
+### files
+yarn.lock
+
+### negation
+!dist/README.md

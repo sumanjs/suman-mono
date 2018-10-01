@@ -1,0 +1,47 @@
+{
+  "name": "suman-shell",
+  "version": "0.0.1007",
+  "description": "suman-shell - helps run suman tests quickly via the command line.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "suman --default"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanjs/suman-shell.git"
+  },
+  "keywords": [
+    "suman",
+    "test",
+    "speed",
+    "performance",
+    "npm",
+    "sumanjs",
+    "mocha",
+    "ava"
+  ],
+  "author": "Olegzandr VD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sumanjs/suman-shell/issues"
+  },
+  "homepage": "https://github.com/sumanjs/suman-shell#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "json-stdio": "latest",
+    "lodash": "^4.17.4",
+    "poolio": "latest",
+    "prepend-transform": "latest",
+    "residence": "latest",
+    "suman-browser-polyfills": "latest",
+    "suman-utils": "latest",
+    "vorpal": "1.11.4",
+    "vorpal-autocomplete-fs": "0.0.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.97",
+    "@types/node": "^8.0.1",
+    "@types/vorpal": "^1.11.0",
+    "bluebird": "^3.5.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@suman-run-plugins/babel-std",
+  "version": "1.0.0",
+  "description": "A Suman run plugin for Babel transpilation.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "suman"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/sumanjs/suman-run-plugins.git"
+  },
+  "keywords": [
+    "sumanjs",
+    "testing",
+    "test",
+    "suman",
+    "suman-run-plugins"
+  ],
+  "author": "Olegzandr VD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sumanjs/suman-run-plugins/issues"
+  },
+  "homepage": "https://github.com/sumanjs/suman-run-plugins#readme"
+}

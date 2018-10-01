@@ -1,0 +1,15 @@
+{
+  "linkToItself": true,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "list": [
+    "suman-utils",
+    "suman-inquirer",
+    "suman-inquirer-directory"
+  ]
+}

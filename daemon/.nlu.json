@@ -1,0 +1,16 @@
+{
+  "linkToItself": true,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "list": [
+    "residence",
+    "poolio",
+    "suman-utils",
+    "suman-types"
+  ]
+}

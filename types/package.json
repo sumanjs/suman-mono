@@ -1,0 +1,42 @@
+{
+  "name": "suman-types",
+  "version": "0.0.1009",
+  "description": "TypeScript type declarations for various SumanJS projects.",
+  "typings": "dts/**/*.ts",
+  "types": "dts/**/*.ts",
+  "scripts": {
+    "test": "suman test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanjs/suman-types.git"
+  },
+  "keywords": [
+    "suman",
+    "sumanjs",
+    "test",
+    "typings",
+    "tsc",
+    "types",
+    "typescript"
+  ],
+  "author": "Olegzandr VD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sumanjs/suman-types/issues"
+  },
+  "homepage": "https://github.com/sumanjs/suman-types#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/async": "^2.0.44",
+    "@types/chai": "^4.0.7",
+    "@types/node": "^8.0.28",
+    "@types/socket.io-client": "^1.4.31",
+    "chai": "^4.1.2",
+    "rxjs": "^5.4.3",
+    "typescript-json-schema": "^0.20.0"
+  },
+  "npp": {
+    "publishable": true
+  }
+}

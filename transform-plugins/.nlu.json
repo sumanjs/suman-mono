@@ -1,0 +1,16 @@
+{
+  "linkToItself": true,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "comments": [
+    "put any comment you want here"
+  ],
+  "list": [
+    "suman-types"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@suman-run-plugins/ts-node",
+  "version": "1.0.0",
+  "description": "A plugin for running Node.js tests with ts-node executable.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "suman test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/sumanjs/suman-run-plugins.git"
+  },
+  "keywords": [
+    "suman",
+    "sumanjs",
+    "testing",
+    "test",
+    "suman-run-plugins"
+  ],
+  "author": "Olegzandr VD",
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^3.3.0"
+  }
+}

@@ -1,0 +1,26 @@
+
+### directories
+.idea
+node_modules
+test
+scripts
+src
+
+### individual files
+.babelrc
+.gitignore
+.npmignore
+.editorconfig
+
+# matching files
+*.json
+*.md
+*.sh
+*.log
+*.txt
+*.ts
+*.yml
+
+# negation
+!*.d.ts
+

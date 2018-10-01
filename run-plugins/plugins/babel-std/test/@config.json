@@ -1,0 +1,12 @@
+{
+  "@transform": {
+    "plugin": {
+      "value": "suman-transfrom-plugins/plugins/babel-std"
+    }
+  },
+  "@run": {
+    "plugin": {
+      "value": "suman-run-plugins/plugins/babel-std"
+    }
+  }
+}

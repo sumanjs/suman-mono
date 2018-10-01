@@ -1,0 +1,24 @@
+
+### folders
+node_modules
+.idea
+test
+scripts
+.vscode
+
+### files
+.npmignore
+.gitignore
+suman.conf.js
+yarn.lock
+.editorconfig
+
+### matching files
+*.sh
+*.md
+*.json
+*.log
+*.DS_Store
+
+
+

@@ -1,0 +1,29 @@
+
+### matching files
+*.sh
+*.md
+*.log
+*.json
+*.DS_Store
+
+### folders
+.idea
+node_modules
+coverage
+.nyc_output
+test
+.github
+.tscmultiwatch
+
+### files
+exp.js
+.gitignore
+.npmignore
+webpack.config.js
+.gitattributes
+suman.conf.js
+.editorconfig
+.dockerignore
+yarn.lock
+
+

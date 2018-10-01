@@ -1,0 +1,18 @@
+{
+  "linkToItself": true,
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "list": [
+    "json-stdio",
+    "suman-types",
+    "suman-events",
+    "suman-browser-polyfills",
+    "suman-utils"
+  ],
+  "comments":[]
+}

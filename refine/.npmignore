@@ -1,0 +1,25 @@
+
+### directories
+node_modules
+.idea
+test
+coverage
+.nyc_output
+scripts
+src
+
+#### matching files
+*.log
+*.json
+*.sh
+*.txt
+*.md
+*.yml
+
+### individual files
+yarn.lock
+.gitignore
+.npmignore
+.editorconfig
+suman.conf.js
+

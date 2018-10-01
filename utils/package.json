@@ -1,0 +1,46 @@
+{
+  "name": "suman-utils",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "version": "0.0.73127",
+  "scripts": {
+    "test": "./scripts/test.sh"
+  },
+  "author": {
+    "name": "Olegzandr VD"
+  },
+  "bugs": {
+    "url": "https://github.com/sumanjs/suman-utils/issues"
+  },
+  "description": "Shared module within the Suman test runner ecosystem",
+  "gitHead": "d04c59843944ed5bd360cab5df7de9aaf29d2bdf",
+  "homepage": "https://github.com/sumanjs/suman-utils#readme",
+  "keywords": [
+    "utils",
+    "test",
+    "framework"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanjs/suman-utils.git"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "chalk": "^2.4.1",
+    "mkdirp": "^0.5.1",
+    "residence": "latest",
+    "rimraf": "^2.6.0",
+    "suman-browser-polyfills": "latest"
+  },
+  "optionalDependencies": {},
+  "devDependencies": {
+    "@types/async": "^2.0.38",
+    "@types/core-js": "^0.9.35",
+    "@types/immutable": "^3.8.7",
+    "@types/node": "^10.11.3",
+    "@types/whatwg-fetch": "0.0.33",
+    "rxjs": "^5.2.0"
+  }
+}

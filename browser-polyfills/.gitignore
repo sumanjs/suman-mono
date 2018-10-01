@@ -1,0 +1,12 @@
+
+### folders
+node_modules
+.idea
+.vscode
+
+### files
+yarn.lock
+
+### matching
+*.log
+.DS_store

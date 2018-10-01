@@ -1,0 +1,32 @@
+
+### matching files
+*.md
+*.txt
+*.log
+*.json
+*.yml
+*.tgz
+
+### folders
+.idea
+.nyc_output
+.github
+.tscmultiwatch
+.vscode
+coverage
+test
+dev-scripts
+src
+.docker.r2g
+
+### files
+.gitignore
+.npmignore
+webpack.config.js
+.gitattributes
+suman.conf.js
+.editorconfig
+.babelrc
+.dockerignore
+
+

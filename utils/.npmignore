@@ -1,0 +1,23 @@
+
+### folders
+node_modules
+test
+.idea
+src
+
+### files
+yarn.lock
+suman.conf.js
+.npmignore
+.gitignore
+.editorconfig
+
+### matching files
+*.sh
+*.json
+*.txt
+*.log
+*.md
+*.yml
+*.DS_Store
+*.tgz

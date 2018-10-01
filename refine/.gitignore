@@ -1,0 +1,16 @@
+
+### folders
+node_modules
+.idea
+coverage
+.nyc_output
+dist
+
+### matching
+*.log
+
+### files
+yarn.lock
+
+### inverse
+!dist/readme.md

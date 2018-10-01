@@ -1,0 +1,26 @@
+
+
+### folders
+node_modules
+.idea
+.nyc_output
+coverage
+.vscode
+dist/*
+logs
+docs
+
+### matching files
+*.log
+test/.suman/.meta
+*.tgz
+
+### files
+path
+assert
+yarn.lock
+*.DS_Store
+
+### negation
+!dist/README.md
+

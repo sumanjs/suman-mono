@@ -1,0 +1,10 @@
+### folders
+node_modules
+coverage
+.nyc_output
+
+###  matching files
+*.DS_Store
+*.log
+
+

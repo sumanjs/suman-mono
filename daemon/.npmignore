@@ -1,0 +1,27 @@
+
+### folders
+.idea
+test
+node_modules
+scripts
+.vscode
+
+### files
+suman.conf.js
+.gitignore
+.npmignore
+yarn.lock
+.babelrc
+
+### matching files
+*.yml
+*.sh
+*.md
+*.txt
+*.log
+*.ts
+*.json
+*.DS_Store
+
+### negation
+!*.d.ts

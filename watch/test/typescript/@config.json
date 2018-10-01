@@ -1,0 +1,22 @@
+{
+  "@src": {
+    "marker": "/@src/"
+  },
+  "@target": {
+    "marker": "/@target/"
+  },
+  "@run": {
+    "marker": "•run.sh",
+    "plugin": {
+      "location": "npm",
+      "value": "suman-run-plugins/plugins/typescript-std"
+    }
+  },
+  "@transform": {
+    "marker": "•transform.sh",
+    "plugin": {
+      "location": "npm",
+      "value": "suman-transform-plugins/plugins/typescript-std"
+    }
+  }
+}

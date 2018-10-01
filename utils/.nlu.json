@@ -1,0 +1,16 @@
+{
+  "linkToItself": true,
+  "comments":[],
+  "searchRoots": [
+    ".."
+  ],
+  "ignore": [
+    "/node_modules/",
+    "/.git/"
+  ],
+  "list": [
+    "residence",
+    "suman-browser-polyfills",
+    "suman-types"
+  ]
+}

@@ -65,7 +65,7 @@ if [[ -L "${NPM_ROOT_GLOBAL}/suman-daemon" || -d "${NPM_ROOT_GLOBAL}/suman-daemo
 
     echo "[suman-daemon] found suman-daemon global installation."
     echo "[suman-daemon] now starting suman-daemon..."
-    node "${NPM_ROOT_GLOBAL}/suman-daemon" > "${daemon_log}" 2>&1 # &
+    node "${NPM_ROOT_GLOBAL}/suman-daemon" # > "${daemon_log}" 2>&1 # &
     # forever start "${NPM_ROOT_GLOBAL}/suman-daemon/index.js" --workingDir $(pwd)
 
 else

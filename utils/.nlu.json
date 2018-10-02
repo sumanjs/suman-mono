@@ -2,7 +2,7 @@
   "linkToItself": true,
   "comments":[],
   "searchRoots": [
-    ".."
+    "$suman_mono_search_root"
   ],
   "ignore": [
     "/node_modules/",

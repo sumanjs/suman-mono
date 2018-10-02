@@ -25,6 +25,7 @@ Test.create(['semver', b => {
   it('sync test', t => {
     t.assert.equal(typeof null, 'object');
     t.assert.equal(t.supply.bar, 'foo');
+    t.assert.equal(false,true);
   });
 
   describe.parallel('nested block', b => {  // constrast this with decribe.series

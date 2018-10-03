@@ -32,6 +32,7 @@
   "homepage": "https://github.com/sumanjs/suman-daemon#readme",
   "dependencies": {
     "@oresoftware/json-stream-parser": "latest",
+    "chalk": "^2.4.1",
     "forever": "^0.15.3",
     "poolio": "latest",
     "residence": "latest",

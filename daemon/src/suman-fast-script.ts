@@ -2,6 +2,8 @@
 'use strict';
 
 //core
+import chalk from "chalk";
+
 const util = require('util');
 const path = require('path');
 const cp = require('child_process');
@@ -9,19 +11,31 @@ const fs = require('fs');
 
 //project
 const sumanIndex = process.env['SUMAN_LIBRARY_ROOT_PATH'];
+const isDebug = process.env.suman_daemon_worker_debug === 'yes';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-process.once('message', function (data) {
+const log = {
+  info: console.error.bind(console, chalk.cyan(`suman-daemon ${chalk.bold('worker')} info:`)),
+  warn: console.error.bind(console, chalk.yellow.bold('suman-daemon worker warning:')),
+  error: console.error.bind(console, chalk.redBright('suman-daemon worker error:')),
+  debug: function () {
+    isDebug && console.error.call(console, chalk.magenta('suman-deamon worker debug:'), ...arguments);
+  }
+};
 
-  const _suman = global.__suman = (global.__suman || {});
+log.info('suamn daemon worker cwd:', process.cwd());
 
+
+process.once('message', function (data: any) {
+
+  // const _suman = global.__suman = (global.__suman || {});
   // _suman.absoluteLastHook = function () {};
 
   process.once('exit', function () {
 
     if (data.msg.pid === -1) {
-      console.log('pid is -1, so we do not attempt to kill process.');
+      log.info('pid is -1, so we do not attempt to kill process.');
       return;
     }
 
@@ -30,27 +44,23 @@ process.once('message', function (data) {
       cp.execSync(`kill -INT ${data.msg.pid}`)
     }
     catch (err) {
-      console.error(err.message);
+      log.error(err.message);
     }
 
   });
 
   if (data.msg.cwd) {
-    console.log(' [suman-daemon] => changing cwd to', data.msg.cwd);
+    log.info('changing cwd to', data.msg.cwd);
     process.chdir(data.msg.cwd);
   }
 
-  data.msg.args.forEach(function (a) {
+  data.msg.args.forEach(function (a: string) {
     process.argv.push(a);
   });
 
-  // console.log(' => data murderer => ',util.inspect(data));
-
   process.argv.push('--force-inception-level-zero');
-  console.log(' [suman-daemon] process.arv => ', util.inspect(process.argv));
+  log.info('process.arv => ', util.inspect(process.argv));
   process.env.SUMAN_EXTRANEOUS_EXECUTABLE = 'yes';
-  // require(path.resolve(process.env.HOME + '/WebstormProjects/oresoftware/sumanjs/suman/test/regexp.js'));
-  // require(path.resolve(process.env.HOME + '/WebstormProjects/oresoftware/sumanjs/suman/test/regexp.js'));
   require(path.resolve(sumanIndex + '/dist/cli.js'));
 
 });
@@ -62,77 +72,35 @@ const sumanFilesToLoad = [
 ];
 
 process.once('SIGINT', function () {
-  console.log('SIGINT received by suman-d.');
+  log.warn('SIGINT received by suman-daemon.');
   process.exit(1);
 });
-
-// fs.readdirSync(path.resolve(sumanIndex + '/lib/test-suite-helpers'))
-// .filter(v => String(v).endsWith('.js'))
-// .forEach(function (item) {
-//   sumanFilesToLoad.push(`lib/test-suite-helpers/${item}`);
-// });
-// //
-// fs.readdirSync(path.resolve(sumanIndex + '/lib/test-suite-methods'))
-// .filter(v => String(v).endsWith('.js'))
-// .forEach(function (item) {
-//   sumanFilesToLoad.push(`lib/test-suite-methods/${item}`);
-// });
-//
-// fs.readdirSync(path.resolve(sumanIndex + '/lib/injection'))
-// .filter(v => String(v).endsWith('.js'))
-// .forEach(function (item) {
-//   sumanFilesToLoad.push(`lib/injection/${item}`);
-// });
-//
-// fs.readdirSync(path.resolve(sumanIndex + '/lib/helpers'))
-// .filter(v => String(v).endsWith('.js'))
-// .forEach(function (item) {
-//   sumanFilesToLoad.push(`lib/helpers/${item}`);
-// });
-//
-// fs.readdirSync(path.resolve(sumanIndex + '/lib/index-helpers'))
-// .filter(v => String(v).endsWith('.js'))
-// .forEach(function (item) {
-//   sumanFilesToLoad.push(`lib/index-helpers/${item}`);
-// });
-//
-// fs.readdirSync(path.resolve(sumanIndex + '/lib/acquire-dependencies'))
-// .filter(v => String(v).endsWith('.js'))
-// .forEach(function (item) {
-//   sumanFilesToLoad.push(`lib/acquire-dependencies/${item}`);
-// });
 
 const pkgJSON = require(path.resolve(sumanIndex + '/package.json'));
 
 sumanFilesToLoad.forEach(function (dep) {
   try {
-    let p = path.resolve(sumanIndex + '/' + dep);
-    require(p);
+    require(path.resolve(sumanIndex + '/' + dep));
   }
   catch (err) {
-    console.error(err.message || err);
+    log.error('foo:',err.message || err);
   }
 });
-
-console.log('pwd => ', process.cwd());
 
 let loadedCount = 0;
 
 Object.keys(pkgJSON['dependencies'] || {}).forEach(function (k) {
   try {
-    require(k);
-    loadedCount++;
+    require(k); loadedCount++;
   }
   catch (err) {
     try {
-      require(path.resolve(sumanIndex + '/node_modules/' + k));
-      loadedCount++;
+      require(path.resolve(sumanIndex + '/node_modules/' + k)); loadedCount++;
     }
     catch (err) {
     }
   }
 });
 
-console.log('\n');
-console.log('=> suman-daemon has preloaded ', loadedCount, 'modules.');
-console.log('\n');
+
+log.info('suman-daemon has preloaded ', loadedCount, 'modules/packages.');

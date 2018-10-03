@@ -6,37 +6,49 @@ import path = require('path');
 import net = require('net');
 import util = require('util');
 import assert = require('assert');
+import chalk from 'chalk';
 
 //npm
 import residence = require('residence');
 import {Pool} from 'poolio';
 import {JSONParser} from '@oresoftware/json-stream-parser';
 
-console.log('starting this thing.');
+/////////////////////////////////////////////////////////////////////
+
+
+const isDebug = process.env.suman_daemon_debug === 'yes';
+
+const log = {
+  info: console.error.bind(console, chalk.cyan(`suman-daemon info:`)),
+  warn: console.error.bind(console, chalk.yellow.bold('suman-daemon warning:')),
+  error: console.error.bind(console, chalk.redBright('suman-daemon error:')),
+  debug: function () {
+    isDebug && console.error.call(console, chalk.magenta('suman-deamon debug:'), ...arguments);
+  }
+};
 
 ///////////////////////////////////////////////
 
-// const projectRoot = residence.findProjectRoot(process.cwd());
-// const sumanLibRoot = path.resolve(__dirname + '/../../../');
-
-console.log('project root => ', process.env.SUMAN_PROJECT_ROOT);
-console.log('suman lib root => ', process.env.SUMAN_LIBRARY_ROOT_PATH);
+const port = 9091;
+log.info('starting suman-daemon, will attempt to listen on port:', chalk.bold(String(port)));
+log.info('suman lib root => ', process.env.SUMAN_LIBRARY_ROOT_PATH);
 
 if (!process.stdout.isTTY) {
-  console.error('process is not a tty, cannot run suman-daemon.');
+  log.error('process is not a tty, cannot run suman-daemon.');
   // process.exit(1);
 }
 
 const f = path.resolve(process.env.HOME + '/.suman/daemon.pid');
+
 try {
   fs.writeFileSync(f, String(process.pid));
 }
 catch (err) {
-  console.error('\n', err.stack, '\n');
+  log.error('\n', err.stack, '\n');
   process.exit(1);
 }
 
-console.log('suman daemon loaded...');
+log.info('suman daemon loaded...');
 
 const p = new Pool({
   filePath: path.resolve(__dirname + '/suman-fast-script.js'),
@@ -54,42 +66,42 @@ const p = new Pool({
   resolveWhenWorkerExits: true
 });
 
-p.on('error', function (e: Error) {
-  console.error('pool error => ', e.stack || e);
+p.on('error', (e: any) => {
+  log.error('pool error:', e.stack || e);
 });
 
 const server = net.createServer(s => {
 
-  console.log('socket connection made.');
+  log.info('socket connection made.');
 
   s.pipe(new JSONParser())
-  .once('error', function (e: Error) {
-    console.error(e.stack || e);
-    s.end(e.stack || e);
-  })
-  .on('data', function (obj: Object) {
+    .once('error', function (e: Error) {
+      log.error(e.stack || e);
+      s.end(e.stack || e);
+      s.destroy();
+    })
+    .on('data', function (obj: any) {
 
-    console.log('message from ', util.inspect(obj));
+      log.info('message from ', util.inspect(obj));
 
-    try {
-      assert(typeof obj.pid === 'number', 'object has no process id.');
-      assert(Array.isArray(obj.args), 'object has no arguments array.');
-    }
-    catch (err) {
-      console.error(err.message);
-      return;
-    }
+      try {
+        assert(typeof obj.pid === 'number', 'object has no process id.');
+        assert(Array.isArray(obj.args), 'object has no arguments array.');
+      }
+      catch (err) {
+        log.error(err.message);
+        return;
+      }
 
-    // socket.write('pinnochio');
-    return p.any(obj, {socket: s});
-  });
+      // socket.write('pinnochio');
+      return p.any(obj, {socket: s});
+    });
 
 });
 
-const port = 9091;
 
 server.once('listening', function () {
-  console.log(`suman daemon tcp server listening on port ${port}`);
+  log.info(`suman daemon tcp server listening on port ${port}`);
 });
 
 server.listen(port);

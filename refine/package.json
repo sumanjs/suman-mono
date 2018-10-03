@@ -5,7 +5,6 @@
   "bin": {
     "suman-r": "cli/cli.js",
     "suman-refine": "cli/cli.js",
-    "suman+": "cli/cli.js",
     "suman-r-inspect": "cli/inspect.sh"
   },
   "main": "dist/index.js",

@@ -1,2 +1,2 @@
-export declare const loadreporter: any;
+export declare const loadreporter: import("reporters").IReporterLoadFnPre;
 export default loadreporter;

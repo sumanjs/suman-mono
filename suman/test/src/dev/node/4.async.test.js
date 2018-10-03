@@ -78,7 +78,7 @@ Test.create((assert, describe, before, beforeEach, after, afterEach, it) => {
   const foo = 3;
   it.cb('zoom', isolated(h => {
     // console.log(foo);
-    const x = foo;
+    // const x = foo;
     h.ctn();
   }));
 

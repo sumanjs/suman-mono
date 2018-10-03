@@ -98,16 +98,18 @@ exports.loadReporter = utils_1.wrapReporter(reporterName, (retContainer, results
             console.log(su.customStringify({
                 '@tap-json': true,
                 '@json-stdio': true,
-                messageType: getTAPJSONType(evn),
-                padding: getPaddingCount(),
-                testCase: {
-                    ok: false,
-                    desc: getTestDesc(test),
-                    filePath: getTestFilePath(test),
-                    error: test.errorDisplay || test.error,
-                    id: results.n,
-                    dateComplete: test.dateComplete,
-                    dateStarted: test.dateStarted
+                value: {
+                    messageType: getTAPJSONType(evn),
+                    padding: getPaddingCount(),
+                    testCase: {
+                        ok: false,
+                        desc: getTestDesc(test),
+                        filePath: getTestFilePath(test),
+                        error: test.errorDisplay || test.error,
+                        id: results.n,
+                        dateComplete: test.dateComplete,
+                        dateStarted: test.dateStarted
+                    }
                 }
             }));
         });
@@ -119,15 +121,17 @@ exports.loadReporter = utils_1.wrapReporter(reporterName, (retContainer, results
             console.log(su.customStringify({
                 '@tap-json': true,
                 '@json-stdio': true,
-                messageType: getTAPJSONType(evn),
-                padding: getPaddingCount(),
-                testCase: {
-                    ok: true,
-                    desc: getTestDesc(test),
-                    filePath: getTestFilePath(test),
-                    id: results.n,
-                    dateComplete: test.dateComplete,
-                    dateStarted: test.dateStarted
+                value: {
+                    messageType: getTAPJSONType(evn),
+                    padding: getPaddingCount(),
+                    testCase: {
+                        ok: true,
+                        desc: getTestDesc(test),
+                        filePath: getTestFilePath(test),
+                        id: results.n,
+                        dateComplete: test.dateComplete,
+                        dateStarted: test.dateStarted
+                    }
                 }
             }));
         });
@@ -139,17 +143,19 @@ exports.loadReporter = utils_1.wrapReporter(reporterName, (retContainer, results
             console.log(su.customStringify({
                 '@tap-json': true,
                 '@json-stdio': true,
-                messageType: getTAPJSONType(evn),
-                padding: getPaddingCount(),
-                testCase: {
-                    ok: true,
-                    desc: getTestDesc(test),
-                    filePath: getTestFilePath(test),
-                    id: results.n,
-                    skipped: true,
-                    skip: true,
-                    dateComplete: test.dateComplete,
-                    dateStarted: test.dateStarted
+                value: {
+                    messageType: getTAPJSONType(evn),
+                    padding: getPaddingCount(),
+                    testCase: {
+                        ok: true,
+                        desc: getTestDesc(test),
+                        filePath: getTestFilePath(test),
+                        id: results.n,
+                        skipped: true,
+                        skip: true,
+                        dateComplete: test.dateComplete,
+                        dateStarted: test.dateStarted
+                    }
                 }
             }));
         });
@@ -161,17 +167,19 @@ exports.loadReporter = utils_1.wrapReporter(reporterName, (retContainer, results
             console.log(su.customStringify({
                 '@tap-json': true,
                 '@json-stdio': true,
-                padding: getPaddingCount(),
-                messageType: getTAPJSONType(evn),
-                testCase: {
-                    ok: true,
-                    desc: getTestDesc(test),
-                    filePath: getTestFilePath(test),
-                    id: results.n,
-                    stubbed: true,
-                    todo: true,
-                    dateComplete: test.dateComplete,
-                    dateStarted: test.dateStarted
+                value: {
+                    padding: getPaddingCount(),
+                    messageType: getTAPJSONType(evn),
+                    testCase: {
+                        ok: true,
+                        desc: getTestDesc(test),
+                        filePath: getTestFilePath(test),
+                        id: results.n,
+                        stubbed: true,
+                        todo: true,
+                        dateComplete: test.dateComplete,
+                        dateStarted: test.dateStarted
+                    }
                 }
             }));
         });

@@ -8,6 +8,7 @@ import util = require('util');
 //npm
 import su = require('suman-utils');
 import chalk from 'chalk';
+
 const dashdash = require('dashdash');
 import residence = require('residence');
 
@@ -24,9 +25,9 @@ process.on('unhandledRejection', function (e) {
   log.error(`<suman-r> has captured an 'unhandledRejection' => \n ${su.getCleanErrorString(e)}`);
 });
 
-process.once('exit', function () {
-  console.log('\n');
-  log.info(' ---- suman-r end ----');
+process.once('exit', code => {
+  console.log('');
+  log.info('Exiting with code =>', chalk.bold(String(code)), '\n');
 });
 
 const projectRoot = residence.findProjectRoot(process.cwd());
@@ -42,7 +43,7 @@ let opts, parser = dashdash.createParser({options});
 try {
   opts = parser.parse(process.argv);
 } catch (e) {
-  log.error(' => suman-r CLI parsing error: %s', e.message);
+  log.error('suman-r CLI parsing error:', e.message);
   process.exit(1);
 }
 
@@ -61,7 +62,7 @@ let clearStdinTimeout = function () {
 
 {
   // here we run the testpoint data stream
-  
+
   // let d = Domain.create();
   //
   // d.on('error', function (e) {
@@ -79,39 +80,37 @@ let clearStdinTimeout = function () {
   //   });
   //
   // });
-  
+
 }
 
 {
-  
+
   // here we run the stream for other data besides testpoint data
-  
+
   let d = Domain.create();
-  
+
   d.on('error', function (e) {
     log.error(su.getCleanErrorString(e));
   });
-  
+
   d.run(function () {
-    
+
     // we use a domain because nothing else seemed to capture the errors properly
     process.stdin.resume()
-    .once('data', clearStdinTimeout)
-    .pipe(getJSONStdioStream())
-    .on('error', function (e: any) {
-      log.error(su.getCleanErrorString(e));
-    })
-    .once('end', function () {
-      console.log();
-      log.info('suman-refine stdin has ended.');
-    })
-    .once('finish', function () {
-      console.log();
-      log.info('suman-refine stdin has finished.');
-    });
-    
+      .once('data', clearStdinTimeout)
+      .pipe(getJSONStdioStream())
+      .on('error', function (e: any) {
+        log.error(su.getCleanErrorString(e));
+      })
+      .once('end', function () {
+        log.debug('suman-refine stdin has ended.');
+      })
+      .once('finish', function () {
+        log.debug('suman-refine stdin has finished.');
+      });
+
   });
-  
+
 }
 
 

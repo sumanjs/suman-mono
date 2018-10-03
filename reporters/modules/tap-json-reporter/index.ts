@@ -4,7 +4,6 @@
 import {IGlobalSumanObj, ISumanOpts} from 'suman-types/dts/global';
 import {ITestDataObj} from "suman-types/dts/it";
 import EventEmitter = NodeJS.EventEmitter;
-import {ITestSuite} from 'suman-types/dts/test-suite';
 import {IRet, IRetContainer, IExpectedCounts, IResultsObj, ITAPJSONTestCase} from 'suman-types/dts/reporters';
 
 //polyfills
@@ -25,6 +24,8 @@ import stdio = require('json-stdio');
 //project
 const _suman: IGlobalSumanObj = global.__suman = (global.__suman || {});
 import {getLogger, wrapReporter} from "../../lib/utils";
+import {TestBlock} from "../../../suman/src/test-suite-helpers/test-suite";
+import {ITestBlock} from "suman-types/dts/test-suite";
 const reporterName = path.basename(__dirname);
 const log = getLogger(reporterName);
 
@@ -169,7 +170,7 @@ export const loadReporter = wrapReporter(reporterName, (retContainer: IRetContai
 
   {
     let evn = String(events.SUMAN_CONTEXT_BLOCK);
-    s.on(evn, function (b: ITestSuite) {
+    s.on(evn, function (b: ITestBlock) {
       stdio.logToStdout({
         messageType: getTAPJSONType(evn),
         padding: getPaddingCount(),
@@ -180,7 +181,7 @@ export const loadReporter = wrapReporter(reporterName, (retContainer: IRetContai
 
   {
     let evn = String(events.TEST_CASE_END);
-    s.on(evn, function (b: ITestSuite) {
+    s.on(evn, function (b: ITestBlock) {
       results.n++;
       stdio.logToStdout({
         messageType: getTAPJSONType(evn),
@@ -195,17 +196,20 @@ export const loadReporter = wrapReporter(reporterName, (retContainer: IRetContai
       console.log(su.customStringify({
         '@tap-json': true,
         '@json-stdio': true,
-        messageType: getTAPJSONType(evn),
-        padding: getPaddingCount(),
-        testCase: {
-          ok: false,
-          desc: getTestDesc(test),
-          filePath: getTestFilePath(test),
-          error: test.errorDisplay || test.error,
-          id: results.n,
-          dateComplete: test.dateComplete,
-          dateStarted: test.dateStarted
+        value:{
+          messageType: getTAPJSONType(evn),
+          padding: getPaddingCount(),
+          testCase: {
+            ok: false,
+            desc: getTestDesc(test),
+            filePath: getTestFilePath(test),
+            error: test.errorDisplay || test.error,
+            id: results.n,
+            dateComplete: test.dateComplete,
+            dateStarted: test.dateStarted
+          }
         }
+
       }));
     });
   }
@@ -217,16 +221,19 @@ export const loadReporter = wrapReporter(reporterName, (retContainer: IRetContai
       console.log(su.customStringify({
         '@tap-json': true,
         '@json-stdio': true,
-        messageType: getTAPJSONType(evn),
-        padding: getPaddingCount(),
-        testCase: {
-          ok: true,
-          desc: getTestDesc(test),
-          filePath: getTestFilePath(test),
-          id: results.n,
-          dateComplete: test.dateComplete,
-          dateStarted: test.dateStarted
+        value: {
+          messageType: getTAPJSONType(evn),
+          padding: getPaddingCount(),
+          testCase: {
+            ok: true,
+            desc: getTestDesc(test),
+            filePath: getTestFilePath(test),
+            id: results.n,
+            dateComplete: test.dateComplete,
+            dateStarted: test.dateStarted
+          }
         }
+
       }));
     });
   }
@@ -238,17 +245,19 @@ export const loadReporter = wrapReporter(reporterName, (retContainer: IRetContai
       console.log(su.customStringify({
         '@tap-json': true,
         '@json-stdio': true,
-        messageType: getTAPJSONType(evn),
-        padding: getPaddingCount(),
-        testCase: {
-          ok: true,
-          desc: getTestDesc(test),
-          filePath: getTestFilePath(test),
-          id: results.n,
-          skipped: true,
-          skip: true,
-          dateComplete: test.dateComplete,
-          dateStarted: test.dateStarted
+        value:{
+          messageType: getTAPJSONType(evn),
+          padding: getPaddingCount(),
+          testCase: {
+            ok: true,
+            desc: getTestDesc(test),
+            filePath: getTestFilePath(test),
+            id: results.n,
+            skipped: true,
+            skip: true,
+            dateComplete: test.dateComplete,
+            dateStarted: test.dateStarted
+          }
         }
       }));
     });
@@ -262,17 +271,19 @@ export const loadReporter = wrapReporter(reporterName, (retContainer: IRetContai
       console.log(su.customStringify({
         '@tap-json': true,
         '@json-stdio': true,
-        padding: getPaddingCount(),
-        messageType: getTAPJSONType(evn),
-        testCase: {
-          ok: true,
-          desc: getTestDesc(test),
-          filePath: getTestFilePath(test),
-          id: results.n,
-          stubbed: true,
-          todo: true,
-          dateComplete: test.dateComplete,
-          dateStarted: test.dateStarted
+        value: {
+          padding: getPaddingCount(),
+          messageType: getTAPJSONType(evn),
+          testCase: {
+            ok: true,
+            desc: getTestDesc(test),
+            filePath: getTestFilePath(test),
+            id: results.n,
+            stubbed: true,
+            todo: true,
+            dateComplete: test.dateComplete,
+            dateStarted: test.dateStarted
+          }
         }
       }));
     });

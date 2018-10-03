@@ -19,8 +19,8 @@ const log = {
   info: console.error.bind(console, chalk.cyan(`suman-daemon ${chalk.bold('worker')} info:`)),
   warn: console.error.bind(console, chalk.yellow.bold('suman-daemon worker warning:')),
   error: console.error.bind(console, chalk.redBright('suman-daemon worker error:')),
-  debug: function () {
-    isDebug && console.error.call(console, chalk.magenta('suman-deamon worker debug:'), ...arguments);
+  debug: function (...args: string[]) {
+    isDebug && console.error.call(console, chalk.magenta('suman-deamon worker debug:'), ...args);
   }
 };
 
@@ -50,7 +50,7 @@ process.once('message', function (data: any) {
   });
 
   if (data.msg.cwd) {
-    log.info('changing cwd to', data.msg.cwd);
+    log.debug('changing cwd to', data.msg.cwd);
     process.chdir(data.msg.cwd);
   }
 
@@ -59,7 +59,7 @@ process.once('message', function (data: any) {
   });
 
   process.argv.push('--force-inception-level-zero');
-  log.info('process.arv => ', util.inspect(process.argv));
+  log.debug('process.arv => ', util.inspect(process.argv));
   process.env.SUMAN_EXTRANEOUS_EXECUTABLE = 'yes';
   require(path.resolve(sumanIndex + '/dist/cli.js'));
 

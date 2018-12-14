@@ -14,7 +14,8 @@
     "suman-events",
     "suman-transform-plugins",
     "suman-utils",
-    "suman-reporters"
+    "suman-reporters",
+    "suman-tools"
   ]
 
 }

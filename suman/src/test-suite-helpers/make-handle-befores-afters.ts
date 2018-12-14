@@ -27,13 +27,14 @@ import {cloneError} from '../helpers/general';
 // import {makeHookParam} from './t-proto-hook';
 import {AllHookParam} from "../test-suite-params/all-hook/all-hook-param";
 import {freezeExistingProps} from 'freeze-existing-props';
+import {TestBlock} from './test-suite';
 
 /////////////////////////////////////////////////////////////////////////////////////
 
 export const makeHandleBeforesAndAfters = function (suman: ISuman, gracefulExit: Function) {
 
   // don't use arrow function here, b/c we may need to access arguments for retry action
-  return function handleBeforesAndAfters(self: TestSuite, aBeforeOrAfter: IOnceHookObj, cb: Function, retryData?: any) {
+  return function handleBeforesAndAfters(self: TestBlock, aBeforeOrAfter: IOnceHookObj, cb: Function, retryData?: any) {
     
     if (_suman.uncaughtExceptionTriggered) {
       _suman.log.error(

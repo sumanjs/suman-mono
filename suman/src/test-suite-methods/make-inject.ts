@@ -3,7 +3,7 @@
 //dts
 import {IGlobalSumanObj} from "suman-types/dts/global";
 import {IInjectOpts, IInjectFn} from "suman-types/dts/inject";
-import {IAllOpts, ITestSuite, IAcceptableOptions} from "suman-types/dts/test-suite";
+import {IAllOpts, IAcceptableOptions} from "suman-types/dts/test-suite";
 import {ISuman, Suman} from "../suman";
 
 //polyfills

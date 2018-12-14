@@ -1,0 +1,20 @@
+{
+  "npm-link-up": true,
+  "linkToSelf": false,
+  "linkToItself": false,
+  "searchRoots": [
+    ".",
+    "../../oresoftware"
+  ],
+  "list": [
+    "suman",
+    "suman-types",
+    "suman-watch",
+    "suman-watch-plugins",
+    "suman-events",
+    "suman-transform-plugins",
+    "suman-utils",
+    "suman-reporters"
+  ]
+
+}

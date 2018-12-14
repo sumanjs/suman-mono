@@ -1,7 +1,7 @@
 'use strict';
 
 //dts
-import {IHandleError, IOnceHookObj, ITestSuite} from "suman-types/dts/test-suite";
+import {IHandleError, IOnceHookObj} from "suman-types/dts/test-suite";
 import {IGlobalSumanObj, ISumanAllHookDomain, ISumanDomain} from "suman-types/dts/global";
 import {ISuman, Suman} from "../suman";
 
@@ -33,7 +33,7 @@ import {freezeExistingProps} from 'freeze-existing-props';
 export const makeHandleBeforesAndAfters = function (suman: ISuman, gracefulExit: Function) {
 
   // don't use arrow function here, b/c we may need to access arguments for retry action
-  return function handleBeforesAndAfters(self: ITestSuite, aBeforeOrAfter: IOnceHookObj, cb: Function, retryData?: any) {
+  return function handleBeforesAndAfters(self: TestSuite, aBeforeOrAfter: IOnceHookObj, cb: Function, retryData?: any) {
     
     if (_suman.uncaughtExceptionTriggered) {
       _suman.log.error(

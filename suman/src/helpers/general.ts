@@ -39,7 +39,7 @@ catch (err) {
 const _suman: IGlobalSumanObj = global.__suman = (global.__suman || {});
 import {events} from 'suman-events';
 import {constants} from '../config/suman-constants';
-import {ITableDataCallbackObj} from "../../../suman-types/dts/suman";
+import {ITableDataCallbackObj} from "suman-types/dts/suman";
 const suiteResultEmitter = _suman.suiteResultEmitter = (_suman.suiteResultEmitter || new EE());
 const results: Array<ITableDataCallbackObj> = _suman.tableResults = (_suman.tableResults || []);
 const rb = _suman.resultBroadcaster = (_suman.resultBroadcaster || new EE());

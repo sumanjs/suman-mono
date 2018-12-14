@@ -383,7 +383,8 @@ export type ISuman = Suman;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-export const makeSuman =  ($module: NodeModule, opts: IInitOpts, sumanOpts: Partial<ISumanOpts>, sumanConfig: Partial<ISumanConfig>): Suman => {
+export const makeSuman =
+  ($module: NodeModule, opts: IInitOpts, sumanOpts: Partial<ISumanOpts>, sumanConfig: Partial<ISumanConfig>) => {
 
   let liveSumanServer = false;
 

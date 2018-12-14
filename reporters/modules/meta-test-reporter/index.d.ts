@@ -1,2 +1,2 @@
-export declare const loadreporter: import("reporters").IReporterLoadFnPre;
+export declare const loadreporter: import("suman-types/dts/reporters").IReporterLoadFnPre;
 export default loadreporter;

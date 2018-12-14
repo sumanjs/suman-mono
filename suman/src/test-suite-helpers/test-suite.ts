@@ -35,9 +35,7 @@ import {EVCb} from 'suman-types/dts/general';
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-type ITestSuiteConstructor = (obj: ITestBlockOpts) => void;
-
-const makeRunChild = function (val: any) {
+const makeRunChild =  (val: any) => {
   return function runChild(child: TestBlock, cb: EVCb<any>) {
     child._run(val, cb);
   }
@@ -80,11 +78,6 @@ const incr = function () {
 export interface IInjectedValues {
   [key: string]: any
 }
-
-export type TestSuiteGetterFn<T> = () => Array<T>;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 export interface TestBlockOpts{
@@ -205,11 +198,19 @@ export class TestBlock  implements ITestBlock {
     this[TestBlockSymbols.afterEaches] = [] as Array<IAFterEachObj>;
     
     this[TestBlockSymbols.injections] = [] as Array<IInjectionObj>;
-    this[TestBlockSymbols.getAfterAllParentHooks] = [] as Array<IAfterAllParentHooks>;
+    this[TestBlockSymbols.getAfterAllParentHooks] = [] as Array<any>; // IAfterAllParentHooks
     
     //////////////////////////////////////////////////////////////////////////////////////
     
     // freezeExistingProps(this);
+  }
+  
+  getIoc(){
+    return this.ioc;
+  }
+  
+  getIocStatic(){
+    return _suman.$staticIoc;
   }
 
   getInjections() : IInjectedValues {
@@ -358,6 +359,7 @@ export class TestBlock  implements ITestBlock {
   }
 
   getValues(mandatory: string, ...args: Array<string>): Array<any>
+  
   getValues(...args: Array<string>) : Array<any> {
     return args.map(k => {
       return this.shared.get(k);

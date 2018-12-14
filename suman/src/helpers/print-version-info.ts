@@ -14,8 +14,7 @@ import chalk from 'chalk';
 //project
 const _suman: IGlobalSumanObj = global.__suman = (global.__suman || {});
 require('./add-suman-global-properties');
-
-const ascii = require('./ascii');
+import {ascii} from './ascii';
 
 ////////////////////////////////////////////////
 
@@ -29,5 +28,5 @@ const v = pkgJSON.version;
 _suman.log.info('Node.js version =>', process.version);
 _suman.log.info(chalk.gray.italic(`Suman v${v} running individual test suite...`));
 _suman.log.info('NODE_ENV =>', `"${process.env.NODE_ENV}"`);
-_suman.log.info('cwd: ' + cwd);
+_suman.log.info('cwd:', cwd);
 console.log(ascii.suman_slant, '\n');

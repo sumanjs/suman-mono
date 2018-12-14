@@ -207,7 +207,8 @@ const addDefine = function (fn: any, Clazz: typeof DefineObject) {
   
 };
 
-export const makeSumanMethods = (suman: ISuman, gracefulExit: Function, handleBeforesAndAfters: Function, notifyParent: Function) => {
+export const makeSumanMethods =
+  (suman: ISuman, gracefulExit: Function, handleBeforesAndAfters: Function, notifyParent: Function) => {
   
   /*
 
@@ -237,7 +238,8 @@ export const makeSumanMethods = (suman: ISuman, gracefulExit: Function, handleBe
   const afterEach: IAfterEachFn = addDefine(makeAfterEach(suman), DefineObjectEachHook);
   const it: ItFn = addDefine(makeIt(suman), DefineObjectTestCase);
   const afterAllParentHooks = addDefine(makeAfterAllParentHooks(suman), DefineObjectAllHook);
-  const describe: IDescribeFn = addDefine(makeDescribe(suman, gracefulExit, notifyParent, blockInjector, handleBeforesAndAfters), DefineObjectContext);
+  const describe: IDescribeFn =
+    addDefine(makeDescribe(suman, gracefulExit, notifyParent, blockInjector, handleBeforesAndAfters), DefineObjectContext);
   
   /////////////////////////////////////////////////////////////////////////////////////////
   

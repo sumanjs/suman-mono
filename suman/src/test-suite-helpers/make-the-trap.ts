@@ -54,7 +54,7 @@ const getAllBeforesEaches = function (zuite: TestBlock) {
   }
 
   //flatten
-  return beforeEaches.reduce( (a, b) => a.concat(b), [])
+  return beforeEaches.reduce((a, b) => a.concat(b), [])
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -198,7 +198,7 @@ export const makeTheTrap = function (suman: ISuman, gracefulExit: Function) {
         }
         
         async.series([
-            function (cb: Function) {
+            function (cb) {
               
               const handleTestContainer = function () {
                 handleTest(self, test, function (err: null, potentialTestError: Error) {
@@ -217,7 +217,7 @@ export const makeTheTrap = function (suman: ISuman, gracefulExit: Function) {
               }
             },
             
-            function (cb: Function) {
+            function (cb) {
               
               async.eachSeries(getAllAfterEaches(self), function (aAfterEach: IAFterEachObj, cb: Function) {
                   handleBeforeOrAfterEach(self, test, aAfterEach, cb);

@@ -1,11 +1,10 @@
 'use strict';
 
 //dts
-import {ITestSuite, IAcceptableOptions} from "suman-types/dts/test-suite";
+import {IAcceptableOptions} from "suman-types/dts/test-suite";
 import {ISuman, Suman} from "../suman";
-import {TTestSuiteMaker} from "suman-types/dts/test-suite-maker";
 import {IDescribeFn, IDescribeOpts, TDescribeHook} from "suman-types/dts/describe";
-import {IGlobalSumanObj, IPseudoError} from "suman-types/dts/global";
+import {IGlobalSumanObj} from "suman-types/dts/global";
 
 //polyfills
 const process = require('suman-browser-polyfills/modules/process');
@@ -40,6 +39,7 @@ import {handleInjections} from '../test-suite-helpers/handle-injections';
 import {parseArgs} from '../helpers/general';
 import {evalOptions} from '../helpers/general';
 import {TestBlock} from "../test-suite-helpers/test-suite";
+import {EVCb} from 'suman-types/dts/general';
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -73,7 +73,7 @@ const handleBadOptions = function (opts: IDescribeOpts, typeName: string) {
 
 export const makeDescribe = function (suman: ISuman, gracefulExit: Function,
                                       notifyParent: Function, blockInjector: Function,
-                                      handleBeforesAndAfters: Function): IDescribeFn {
+                                      handleBeforesAndAfters: Function): any {  // instead of any, should be `IDescribeFn`
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -196,7 +196,7 @@ export const makeDescribe = function (suman: ISuman, gracefulExit: Function,
       assert(suite.bIsFirstArg, 'First argument name for describe/context block callbacks must be "b" (for "block").');
     }
 
-    suite._run = function (val: any, callback: Function) {
+    suite._run = function (val: any, callback: EVCb<any,any>) {
 
       if (zuite.skipped || zuite.skippedDueToDescribeOnly) {
         notifyParent(zuite, callback);  // notify parent that child is complete
@@ -205,7 +205,7 @@ export const makeDescribe = function (suman: ISuman, gracefulExit: Function,
 
       const d = domain.create();
 
-      d.once('error', function (err: IPseudoError) {
+      d.once('error', function (err: any) {
         console.error('\n');
         if (!err || typeof err !== 'object') {
           err = new Error(err ? (typeof err === 'string' ? err : util.inspect(err)) : 'unknown error passed to handler');
@@ -265,7 +265,7 @@ export const makeDescribe = function (suman: ISuman, gracefulExit: Function,
               return gracefulExit(err);
             }
 
-            suite.fatal = function (err: IPseudoError) {
+            suite.fatal = function (err: any) {
               err = err || new Error(' => suite.fatal() was called by the developer => fatal unspecified error.');
               _suman.log.error(err.stack || err);
               err.sumanExitCode = constants.EXIT_CODES.ERROR_PASSED_AS_FIRST_ARG_TO_DELAY_FUNCTION;

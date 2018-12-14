@@ -2,7 +2,7 @@
 
 //dts
 import {IBeforeFn, IBeforeOpts} from "suman-types/dts/before";
-import {IAllOpts, ITestSuite, IAcceptableOptions} from "suman-types/dts/test-suite";
+import {IAllOpts, IAcceptableOptions} from "suman-types/dts/test-suite";
 import {IGlobalSumanObj} from "suman-types/dts/global";
 import {ISuman, Suman} from "../suman";
 
@@ -19,7 +19,7 @@ import assert = require('assert');
 import EE = require('events');
 
 //npm
-const pragmatik = require('pragmatik');
+import pragmatik = require('pragmatik');
 import async = require('async');
 import chalk from 'chalk';
 import su = require('suman-utils');

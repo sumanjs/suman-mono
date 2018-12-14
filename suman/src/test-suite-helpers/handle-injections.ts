@@ -1,9 +1,8 @@
 'use strict';
 
 //dts
-import {ITestSuite} from "suman-types/dts/test-suite";
 import {IInjectionObj} from "suman-types/dts/inject";
-import {IPseudoError, IGlobalSumanObj} from "suman-types/dts/global";
+import { IGlobalSumanObj} from "suman-types/dts/global";
 import {ErrorCallback, Dictionary} from 'async';
 
 //polyfills
@@ -25,6 +24,7 @@ const _suman: IGlobalSumanObj = global.__suman = (global.__suman || {});
 // import {makeInjectParam} from './t-proto-inject';
 import {InjectParam} from "../test-suite-params/inject/inject-param";
 import {constants} from "../config/suman-constants";
+import {TestBlock} from './test-suite';
 const weAreDebugging = su.weAreDebugging;
 
 ///////////////////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ interface IInjectionValues {
 
 ///////////////////////////////////////////////////////////////////
 
-export const handleInjections = function (suite: ITestSuite, cb: ErrorCallback<any>) {
+export const handleInjections = function (suite: TestBlock, cb: ErrorCallback<any>) {
   
   const addValuesToSuiteInjections = function (k: string, val: any): void {
     
@@ -71,7 +71,7 @@ export const handleInjections = function (suite: ITestSuite, cb: ErrorCallback<a
       timer: null as any
     };
     
-    const first = function (err: IPseudoError) {
+    const first = function (err: any) {
       if (callable) {
         callable = false;
         clearTimeout(timerObj.timer);
@@ -96,7 +96,7 @@ export const handleInjections = function (suite: ITestSuite, cb: ErrorCallback<a
         
         injParam.callbackMode = true;
         
-        let d = function (err?: IPseudoError, results?: IInjectionRetObj) {
+        let d = function (err?: any, results?: IInjectionRetObj) {
           
           if (err) {
             return reject(err);

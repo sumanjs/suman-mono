@@ -60,7 +60,7 @@ export const makeStartSuite = function (suman: ISuman, gracefulExit: Function, h
       
       async.series({
           
-          runBeforeEachBlock: function (cb) {
+          runBeforeEachBlock (cb) {
             async.eachSeries(self.getBeforeBlockList(), function (aBeforeOrAfter: IOnceHookObj, cb: Function) {
                 handleBeforesAndAfters(self, aBeforeOrAfter, cb);
               },
@@ -70,7 +70,7 @@ export const makeStartSuite = function (suman: ISuman, gracefulExit: Function, h
               });
           },
           
-          runBefores: function (cb: Function) {
+          runBefores (cb) {
             
             // NOTE: we always run before hooks, because child suites might have tests
             async.eachSeries(self.getBefores(), function (aBeforeOrAfter: IOnceHookObj, cb: Function) {
@@ -86,7 +86,7 @@ export const makeStartSuite = function (suman: ISuman, gracefulExit: Function, h
             
           },
           
-          runTests: function (cb: Function) {
+          runTests (cb) {
             
             if (self.skipped || self.skippedDueToOnly) {
               // note: we don't run the tests if a block is skipped due to only
@@ -172,7 +172,7 @@ export const makeStartSuite = function (suman: ISuman, gracefulExit: Function, h
               });
             
           },
-          runAfters: function (cb: Function) {
+          runAfters (cb) {
             
             if (self.afterHooksCallback) {
               return self.afterHooksCallback(cb);
@@ -197,7 +197,7 @@ export const makeStartSuite = function (suman: ISuman, gracefulExit: Function, h
             
           },
           
-          runAfterBlocks: function (cb) {
+          runAfterBlocks (cb) {
             async.eachSeries(self.getAfterBlockList(), function (aBeforeOrAfter: IOnceHookObj, cb: Function) {
                 handleBeforesAndAfters(self, aBeforeOrAfter, cb);
               },

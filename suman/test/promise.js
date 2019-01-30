@@ -8,29 +8,74 @@ class Promise {
     this.onRejected = null;
     
     f(v => {
+      
+      if(this.state === 'resolved'){
+        throw 'Promise resolve callback fired twice.';
+      }
+      
+      if(this.state === 'rejected'){
+        throw 'Promise resolve callback fired after promise was already rejected.';
+      }
+      
       this.state = 'resolved';
       this.val = v;
-      process.nextTick(() => {
+      
+      if (this.thens.length < 1) {
+        return;
+      }
+      
+      // process.nextTick(() => {
+        
         for (let v of this.thens) {
-          v.f(v.resolve, v.reject);
+          
+          try {
+            // v.onResolved(v.resolve, v.reject);
+           const val = v.onResolved(this.val);
+           if(!Promise.isPromise(val)){
+              v.resolve(val);
+           }
+           else{
+             val.then(v.resolve,v.reject);
+           }
+
+          } catch (err) {
+            throw 'bing! ' + err.stack;
+            // v.onRejected(v.resolve())
+          }
+          
         }
-      });
+      // });
       
     }, err => {
+  
+      if(this.state === 'rejected'){
+        throw 'Promise reject callback fired twice.';
+      }
+  
+      if(this.state === 'resolved'){
+        throw 'Promise reject callback fired after promise was already resolved.';
+      }
+      
       this.state = 'rejected';
       this.val = err;
-      process.nextTick(() => {
+      
+      if (this.thens.length < 1) {
+        return;
+      }
+      
+      // process.nextTick(() => {
         for (let v of this.thens) {
+          console.log('this gets hit');
           v.reject(this.val);
         }
-      });
+      // });
     });
   }
   
   static isPromise(v) {
     return v
-      && typeof v.then === 'function';
-      // && typeof v.catch === 'function';
+      && typeof v.then === 'function'
+      && typeof v.catch === 'function';
   }
   
   static resolve(val) {
@@ -41,25 +86,24 @@ class Promise {
     return new Promise((resolve, reject) => reject(val));
   }
   
-  then(f, onRejected) {
+  then(onResolved, onRejected) {
+    
     const p = new Promise((resolve, reject) => {
       
       if (this.state === 'pending') {
-        return this.thens.push({f, resolve, reject});  // <<< pass onRejected here?
+        return this.thens.push({onResolved, onRejected, resolve, reject});  // <<< pass onRejected here?
       }
       
       if (this.state === 'resolved') {
         
         try {
-          const result = f(this.val);
+          const result = onResolved(this.val);
           if (!Promise.isPromise(result)) {
             return resolve(result);
           }
-          try {
-            return result.then(resolve, reject);
-          } catch (err) {
-            return reject(err);
-          }
+          
+          return result.then(resolve, reject);
+          
         } catch (err) {
           return reject(err);
         }
@@ -69,16 +113,12 @@ class Promise {
         try {
           
           const result = onRejected(this.val);
-  
+          
           if (!Promise.isPromise(result)) {
             return resolve(result);
           }
           
-          try {
-            return result.then(resolve, reject);
-          } catch (err) {
-            return reject(err);
-          }
+          return result.then(resolve, reject);
           
         } catch (err) {
           return reject(err);
@@ -93,59 +133,10 @@ class Promise {
     return p;
   }
   
-  ca3tch(f) {
-    const p = new Promise((resolve, reject) => {
-      
-      if (this.state === 'pending') {
-        return this.thens.push({f, resolve, reject});
-      }
-      
-      if (this.state === 'resolved') {
-        try {
-          return resolve(f(this.val));
-        } catch (err) {
-          return reject(err);
-        }
-      }
-      
-      if (onRejected) {
-        return onRejected(this.val);
-      }
-      
-      reject(this.val);
-      
-    });
-    
-    p.onRejected = onRejected;
-    return p;
+  catch(f) {
+    return this.then(null, f);
   }
   
 }
-
-const p = Promise.resolve(null).then(v => {
-  throw 3;
-});
-
-const p1 = p.then(v => 3, z => {
-  console.error('error:', z);
-  return Promise.resolve(32);
-});
-
-const p2 = p.then(v => 4, z => {
-  console.error('error:', z);
-  return Promise.resolve(42);
-});
-
-p1.then(console.log.bind(null, '3?'));
-p2.then(console.log.bind(null, '4?'));
-
-// p.catch(v => {
-// console.error('foo1');
-// });
-//
-// p.catch(v => {
-//   console.error('foo2');
-// });
-
 
 exports.Promise = Promise;

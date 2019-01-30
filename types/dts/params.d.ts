@@ -6,6 +6,7 @@ export interface IHookOrTestCaseParam {
 
   desc: string;
   callbackMode?: boolean
+  asyncPromise: Promise<any>,
   slow: () => void;
   fatal: (err: any) => void;
   // callbackMode: boolean,

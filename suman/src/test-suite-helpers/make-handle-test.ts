@@ -165,7 +165,7 @@ export const makeHandleTest = function (suman: ISuman, gracefulExit: Function) {
         test.dateStarted = Date.now();
         
         if (su.isGeneratorFn(test.fn)) {
-          const handlePotentialPromise = helpers.handleReturnVal(t.handlePossibleError.bind(t), fnStr, test);
+          const handlePotentialPromise = helpers.handleReturnVal(t.handlePossibleError.bind(t), fnStr, test, t);
           handlePotentialPromise(helpers.handleGenerator(test.fn, t));
         }
         else if (test.cb === true) {
@@ -200,7 +200,7 @@ export const makeHandleTest = function (suman: ISuman, gracefulExit: Function) {
           
         }
         else {
-          const handlePotentialPromise = helpers.handleReturnVal(t.handlePossibleError.bind(t), fnStr, test);
+          const handlePotentialPromise = helpers.handleReturnVal(t.handlePossibleError.bind(t), fnStr, test, t);
           handlePotentialPromise(test.fn.call(null, t), warn, d);
         }
         

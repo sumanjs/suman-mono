@@ -20,6 +20,7 @@ import su = require('suman-utils');
 //project
 const _suman: IGlobalSumanObj = global.__suman = (global.__suman || {});
 import {makeRunGenerator} from '../helpers/general';
+import {IHookOrTestCaseParam} from 'suman-types/dts/params';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -28,7 +29,7 @@ const defaultErrorEvents = ['error'];
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-export const handleReturnVal = function (done: Function, fnStr: string, testOrHook: ITestDataObj | IHookObj) {
+export const handleReturnVal = function (done: Function, fnStr: string, testOrHook: ITestDataObj | IHookObj, t: IHookOrTestCaseParam) {
   
   return function handle(val: any, warn?: boolean) {
     
@@ -36,7 +37,17 @@ export const handleReturnVal = function (done: Function, fnStr: string, testOrHo
       _suman.writeTestError('\n Suman warning: you may have forgotten to return a Promise => \n' + fnStr + '\n');
     }
     
-    if (su.isObservable(val)) {
+    if(t.asyncPromise){
+      
+      t.asyncPromise.then(function () {
+          done(null);
+        },
+        function (err) {
+          done(err || new Error('Suman unkwnown error'));
+        });
+      
+    }
+    else if (su.isObservable(val)) {
       
       (val as Observable<any>).subscribe(
         function onNext(val: any) {

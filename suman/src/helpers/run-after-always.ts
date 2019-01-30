@@ -195,7 +195,9 @@ export const runAfterAlways = function (suman: ISuman, cb: Function) {
             
           }
           else {
-            const handlePotentialPromise = helpers.handleReturnVal(fini, fnStr);
+            
+            throw new Error('We need to pass testOrHook object instead of null.');
+            const handlePotentialPromise = helpers.handleReturnVal(fini, fnStr, null, t);
             // arg = freezeExistingProps(t);
             arg = t;
             handlePotentialPromise(anAfter.fn.call(anAfter.ctx, arg), warn);

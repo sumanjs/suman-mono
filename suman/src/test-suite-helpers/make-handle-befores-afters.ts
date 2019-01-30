@@ -155,7 +155,7 @@ export const makeHandleBeforesAndAfters = function (suman: ISuman, gracefulExit:
         fini.thot = h;
         
         if (su.isGeneratorFn(aBeforeOrAfter.fn)) {
-          const handle = helpers.handleReturnVal(h.handlePossibleError.bind(h), fnStr, aBeforeOrAfter);
+          const handle = helpers.handleReturnVal(h.handlePossibleError.bind(h), fnStr, aBeforeOrAfter, h);
           handle(helpers.handleGenerator(aBeforeOrAfter.fn, h));
         }
         else if (aBeforeOrAfter.cb) {
@@ -185,7 +185,7 @@ export const makeHandleBeforesAndAfters = function (suman: ISuman, gracefulExit:
           }
         }
         else {
-          const handle = helpers.handleReturnVal(h.handlePossibleError.bind(h), fnStr, aBeforeOrAfter);
+          const handle = helpers.handleReturnVal(h.handlePossibleError.bind(h), fnStr, aBeforeOrAfter, h);
           handle(aBeforeOrAfter.fn.call(null, h), warn);
         }
       });

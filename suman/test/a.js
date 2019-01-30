@@ -11,10 +11,10 @@ Test.create(['semver', b => {
   // const {describe, before, beforeEach, after, afterEach, it} = b.getHooks();
   // const {semver, z} = b.getSourced();
   
-  b.hooks(({describe,after, afterEach}) => {
-  
-  
-  });
+  // b.hooks(({describe,after, afterEach}) => {
+  //
+  //
+  // });
   
   
   

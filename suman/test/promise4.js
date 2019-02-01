@@ -1,3 +1,6 @@
+
+const {Promise} = require('./promise');
+
 Promise.resolve(null).then(v => {
     throw 'fart';
   }, e => {

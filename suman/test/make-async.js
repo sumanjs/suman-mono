@@ -11,8 +11,7 @@ Test.create(b => {
   it("does", t => {
     
     const v = t.makeAsync();
-    
-    setTimeout(v.fail, 400);
+    setTimeout(v.done, 40);
     
   });
   

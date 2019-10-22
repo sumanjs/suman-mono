@@ -40,6 +40,7 @@ const _suman: IGlobalSumanObj = global.__suman = (global.__suman || {});
 import {events} from 'suman-events';
 import {constants} from '../config/suman-constants';
 import {ITableDataCallbackObj} from "suman-types/dts/suman";
+
 const suiteResultEmitter = _suman.suiteResultEmitter = (_suman.suiteResultEmitter || new EE());
 const results: Array<ITableDataCallbackObj> = _suman.tableResults = (_suman.tableResults || []);
 const rb = _suman.resultBroadcaster = (_suman.resultBroadcaster || new EE());
@@ -74,9 +75,9 @@ export const handleSetupComplete = function (zuite: TestBlock, type: string) {
     e.sumanExitCode = constants.EXIT_CODES.ASYCNCHRONOUS_REGISTRY_OF_TEST_BLOCK_METHODS;
     
     e.stack = String(e.stack).split('\n').filter(function (line) {
-      return !/\/node_modules\//.test(line) && !/\/next_tick.js/.test(line);
-    })
-    .join('\n');
+        return !/\/node_modules\//.test(line) && !/\/next_tick.js/.test(line);
+      })
+      .join('\n');
     
     if (zuite) {
       _suman.log.error('Regarding the following test suite with name =>', util.inspect(zuite.title || zuite.desc));
@@ -233,19 +234,20 @@ export const makeRunGenerator = function (fn: Function, ctx: any) {
       if (result.done) {
         return Promise.resolve(result.value);
       }
-      else {
-        return Promise.resolve(result.value).then(function (res) {
-            return handle(generator.next(res));
-          },
-          function (e) {
-            return handle(generator.throw(e));
-          });
-      }
+      
+      return Promise.resolve(result.value).then(function (res) {
+          return handle(generator.next(res));
+        },
+        function (e) {
+          return handle(generator.throw(e));
+        });
+      
     };
     
     try {
       return handle(generator.next());
-    } catch (e) {
+    }
+    catch (e) {
       return Promise.reject(e);
     }
   }
@@ -288,9 +290,9 @@ export const asyncHelper =
     }
     else {
       Promise.resolve(fn.apply(null, $args))
-      .then(resolve, function (e: any | string) {
-        reject({key: key, error: e});
-      });
+        .then(resolve, function (e: any | string) {
+          reject({key: key, error: e});
+        });
     }
     
   };
@@ -398,17 +400,17 @@ export const resolveSharedDirs = function (sumanConfig: ISumanConfig, projectRoo
         `given your configuration and command line options.`);
       return process.exit(constants.EXIT_CODES.COULD_NOT_LOCATE_SUMAN_HELPERS_DIR);
     }
-
-      sumanHelpersDir = path.resolve(projectRoot + '/.suman');
-      try {
-        fs.mkdirSync(sumanHelpersDir)
+    
+    sumanHelpersDir = path.resolve(projectRoot + '/.suman');
+    try {
+      fs.mkdirSync(sumanHelpersDir)
+    }
+    catch (err) {
+      if (!/EEXIST/i.test(err.message)) {
+        _suman.log.error(err.stack);
+        return process.exit(constants.EXIT_CODES.COULD_NOT_LOCATE_SUMAN_HELPERS_DIR);
       }
-      catch (err) {
-        if (!/EEXIST/i.test(err.message)) {
-          _suman.log.error(err.stack);
-          return process.exit(constants.EXIT_CODES.COULD_NOT_LOCATE_SUMAN_HELPERS_DIR);
-        }
-      }
+    }
   }
   
   const logDir = path.resolve(sumanHelpersDir + '/logs');
@@ -818,7 +820,7 @@ export interface SumanPseudoError {
   isFromTest?: boolean
 }
 
-export const cloneError = function (err: Error, newMessage: string, strip?: boolean) : ClonedError {
+export const cloneError = function (err: Error, newMessage: string, strip?: boolean): ClonedError {
   
   const obj = {} as ClonedError;
   obj.message = newMessage || `Suman implementation error: "newMessage" is not defined. Please report: ${constants.SUMAN_ISSUE_TRACKER_URL}.`;

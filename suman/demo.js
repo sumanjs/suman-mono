@@ -1,6 +1,21 @@
 const _ = require('lodash');
 const assert = require('assert');
 
+
+class Foo {
+  constructor(){
+    console.log('dog');
+  }
+}
+
+class B extends Foo {
+
+}
+
+new B();
+
+process.exit(0);
+
 const putInBuckets = function (min, list) {
   
   if (list.length <= min) {

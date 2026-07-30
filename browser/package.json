@@ -28,18 +28,19 @@
   "homepage": "https://github.com/sumanjs/suman-browser#readme",
   "dependencies": {
     "async": "^2.6.4",
-    "chrome-launcher": "^0.10.2",
-    "lodash": "^4.17.4",
-    "puppeteer": "^1.0.0",
+    "chrome-launcher": "^1.2.1",
+    "lodash": "^4.18.1",
+    "puppeteer": "^25.4.0",
     "replacestream": "^4.0.3",
     "suman-utils": "latest",
-    "webpack": "^3.8.1",
-    "webpack-stream": "^4.0.0"
+    "webpack": "^5.109.2",
+    "webpack-stream": "^7.0.0"
   },
   "devDependencies": {
     "@types/async": "^2.0.49",
     "@types/core-js": "^0.9.43",
     "@types/lodash": "^4.14.116",
-    "@types/node": "^8.0.47"
+    "@types/node": "^8.0.47",
+    "node-polyfill-webpack-plugin": "^4.1.0"
   }
 }

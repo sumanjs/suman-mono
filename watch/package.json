@@ -31,7 +31,7 @@
   "dependencies": {
     "async": "^2.6.1",
     "chalk": "^2.4.1",
-    "chokidar": "^1.6.1",
+    "chokidar": "^5.0.0",
     "dashdash": "^1.14.1",
     "lodash": "^4.17.4",
     "poolio": "latest",

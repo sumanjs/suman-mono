@@ -29,7 +29,7 @@
   "dependencies": {
     "async": "^2.5.0",
     "chrome-launcher": "^1.2.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.18.1",
     "puppeteer": "^25.4.0",
     "replacestream": "^4.0.3",
     "suman-utils": "latest",

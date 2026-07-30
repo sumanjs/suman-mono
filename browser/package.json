@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/sumanjs/suman-browser#readme",
   "dependencies": {
-    "async": "^2.5.0",
+    "async": "^2.6.4",
     "chrome-launcher": "^1.2.1",
     "lodash": "^4.18.1",
     "puppeteer": "^25.4.0",

@@ -262,11 +262,12 @@ export const makeRun = function (projectRoot: string, paths: Array<string>, suma
 
     });
 
-    let chokidarWatcher = chokidar.watch('**/*.js', {
+    const watchPlan = utils.getChokidarWatchPlan(['**/*.js'], projectRoot);
+    let chokidarWatcher = chokidar.watch(watchPlan.paths, {
       cwd: projectRoot,
       persistent: true,
       ignoreInitial: true,
-      ignored: /(\.log$|\/.idea\/|\/node_modules\/suman\/)/
+      ignored: [/(\.log$|\/.idea\/|\/node_modules\/suman\/)/, watchPlan.ignored]
     });
 
     chokidarWatcher.on('error', function (e: Error) {

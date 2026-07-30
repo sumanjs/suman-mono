@@ -91,12 +91,13 @@ export const makeRun = function (projectRoot: string, paths: Array<string>, suma
     .map((v: string | RegExp) => v instanceof RegExp ? v : new RegExp(v));
 
     const exec = watchObj.exec;
+    const watchPlan = utils.getChokidarWatchPlan(includes);
 
-    let watcher = chokidar.watch(includes, {
+    let watcher = chokidar.watch(watchPlan.paths, {
       // cwd: projectRoot,
       persistent: true,
       ignoreInitial: true,
-      ignored,
+      ignored: ignored.concat(watchPlan.ignored),
     });
 
     watcher.on('error', function (e: Error) {

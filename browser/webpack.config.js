@@ -1,7 +1,32 @@
 
 const path = require('path');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
+
+  plugins: [
+    new NodePolyfillPlugin({
+      onlyAliases: [
+        'assert',
+        'constants',
+        'domain',
+        'events',
+        'http',
+        'https',
+        'os',
+        'path',
+        'punycode',
+        'querystring',
+        'stream',
+        'string_decoder',
+        'timers',
+        'tty',
+        'url',
+        'util',
+        'vm'
+      ]
+    })
+  ],
 
   // entry: ['babel-polyfill', './lib/index.js'],
   entry: ['./node_modules/suman/lib/index.js'],
@@ -35,42 +60,26 @@ module.exports = {
       fs: require.resolve('suman-browser-polyfills/modules/fs'),
       process: require.resolve('suman-browser-polyfills/modules/process'),
     },
+    fallback: {
+      buffer: false,
+      child_process: false,
+      cluster: false,
+      console: false,
+      crypto: false,
+      dgram: false,
+      dns: false,
+      module: false,
+      net: false,
+      readline: false,
+      repl: false,
+      tls: false,
+      v8: false,
+      zlib: false
+    },
     extensions: ['.js']
   },
 
   node: {
-    assert: true,
-    buffer: false,
-    child_process: 'empty',
-    cluster: 'empty',
-    console: false,
-    constants: true,
-    crypto: 'empty',
-    dgram: 'empty',
-    dns: 'mock',
-    domain: true,
-    events: true,
-    // fs: 'empty',
-    http: true,
-    https: true,
-    module: 'empty',
-    net: 'mock',
-    os: true,
-    path: true,
-    process: false,
-    punycode: true,
-    querystring: true,
-    readline: 'empty',
-    repl: 'empty',
-    stream: true,
-    string_decoder: true,
-    timers: true,
-    tls: 'mock',
-    tty: true,
-    url: true,
-    util: true,
-    v8: 'mock',
-    vm: true,
-    zlib: 'empty',
+    global: true
   }
 };

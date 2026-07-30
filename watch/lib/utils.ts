@@ -22,6 +22,7 @@ import log from './logging';
 import chalk = require('chalk');
 import * as async from 'async';
 import * as su from 'suman-utils';
+const picomatch = require('picomatch');
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -42,6 +43,100 @@ export const getAlwaysIgnore = function () {
 
   ];
 
+};
+
+const normalizeGlobPath = function (value: string) {
+  return value.replace(/\\/g, '/');
+};
+
+const addUnique = function (values: Array<string>, value: string) {
+  if (values.indexOf(value) < 0) {
+    values.push(value);
+  }
+};
+
+const testRegExp = function (regex: RegExp, value: string) {
+  regex.lastIndex = 0;
+  return regex.test(value);
+};
+
+export const getChokidarWatchPlan = function (includes: Array<string | RegExp>, cwd?: string) {
+
+  const root = path.resolve(cwd || process.cwd());
+  const watchPaths: Array<string> = [];
+  const positiveMatchers: Array<(filePath: string) => boolean> = [];
+  const negativeMatchers: Array<(filePath: string) => boolean> = [];
+
+  includes.forEach(function (include: string | RegExp) {
+
+    if (include instanceof RegExp) {
+      addUnique(watchPaths, '.');
+      positiveMatchers.push(function (filePath: string) {
+        const absolutePath = path.resolve(root, filePath);
+        const relativePath = path.relative(root, absolutePath);
+        return testRegExp(include, filePath) ||
+          testRegExp(include, relativePath) ||
+          testRegExp(include, absolutePath);
+      });
+      return;
+    }
+
+    const normalizedPattern = normalizeGlobPath(include);
+    const scan = picomatch.scan(normalizedPattern);
+
+    if (!scan.isGlob) {
+      addUnique(watchPaths, include);
+      const literalPath = path.resolve(root, include);
+      positiveMatchers.push(function (filePath: string) {
+        const absolutePath = path.resolve(root, filePath);
+        return absolutePath === literalPath || absolutePath.indexOf(literalPath + path.sep) === 0;
+      });
+      return;
+    }
+
+    let matcherPattern = scan.negated ? normalizedPattern.substring(scan.start) : normalizedPattern;
+    if (!path.isAbsolute(include) && matcherPattern.indexOf('./') === 0) {
+      matcherPattern = matcherPattern.substring(2);
+    }
+
+    const matcher = picomatch(matcherPattern);
+    const matchesGlob = function (filePath: string) {
+      const absolutePath = path.resolve(root, filePath);
+      const relativePath = normalizeGlobPath(path.relative(root, absolutePath));
+      return matcher(path.isAbsolute(include) ? normalizeGlobPath(absolutePath) : relativePath);
+    };
+
+    if (scan.negated) {
+      negativeMatchers.push(matchesGlob);
+    }
+    else {
+      addUnique(watchPaths, scan.base || '.');
+      positiveMatchers.push(matchesGlob);
+    }
+  });
+
+  if (watchPaths.length < 1) {
+    watchPaths.push('.');
+  }
+
+  const isIncluded = function (filePath: string) {
+    const hasPositiveMatch = positiveMatchers.length < 1 ||
+      positiveMatchers.some(function (matcher: (filePath: string) => boolean) {
+        return matcher(filePath);
+      });
+
+    return hasPositiveMatch && !negativeMatchers.some(function (matcher: (filePath: string) => boolean) {
+      return matcher(filePath);
+    });
+  };
+
+  return {
+    paths: watchPaths,
+    isIncluded,
+    ignored: function (filePath: string, stats?: fs.Stats) {
+      return Boolean(stats && stats.isFile() && !isIncluded(filePath));
+    }
+  };
 };
 
 const sig = ['@run.sh', '@transform.sh', '@config.json', 'suman.conf.js'];

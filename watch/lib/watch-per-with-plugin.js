@@ -199,11 +199,12 @@ exports.makeRun = function (projectRoot, paths, sumanOpts) {
                 killTestProcess();
             }
         });
-        let chokidarWatcher = chokidar.watch('**/*.js', {
+        const watchPlan = utils_1.default.getChokidarWatchPlan(['**/*.js'], projectRoot);
+        let chokidarWatcher = chokidar.watch(watchPlan.paths, {
             cwd: projectRoot,
             persistent: true,
             ignoreInitial: true,
-            ignored: /(\.log$|\/.idea\/|\/node_modules\/suman\/)/
+            ignored: [/(\.log$|\/.idea\/|\/node_modules\/suman\/)/, watchPlan.ignored]
         });
         chokidarWatcher.on('error', function (e) {
             logging_1.default.error('suman-watch watcher experienced an error', e.stack || e);

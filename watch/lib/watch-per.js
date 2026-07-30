@@ -48,10 +48,11 @@ exports.makeRun = function (projectRoot, paths, sumanOpts) {
         const ignored = alwaysIgnore.concat(excludes)
             .map((v) => v instanceof RegExp ? v : new RegExp(v));
         const exec = watchObj.exec;
-        let watcher = chokidar.watch(includes, {
+        const watchPlan = utils_1.default.getChokidarWatchPlan(includes);
+        let watcher = chokidar.watch(watchPlan.paths, {
             persistent: true,
             ignoreInitial: true,
-            ignored,
+            ignored: ignored.concat(watchPlan.ignored),
         });
         watcher.on('error', function (e) {
             logging_1.default.error('suman-watch watcher experienced an error', e.stack || e);

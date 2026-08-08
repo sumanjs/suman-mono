@@ -8,4 +8,7 @@ coverage
 *.DS_Store
 *.log
 
-
+tmp
+temp
+tmp/worktrees
+temp/worktrees

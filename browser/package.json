@@ -6,7 +6,9 @@
   "types": "index.d.ts",
   "main": "index.js",
   "scripts": {
-    "test": "suman"
+    "test": "suman",
+    "lint:ores": "if [ -f ../.ores-lint/lint.sh ]; then sh ../.ores-lint/lint.sh; else echo 'ores-lint not installed'; fi",
+    "prepublishOnly": "npm run lint:ores"
   },
   "repository": {
     "type": "git",
@@ -42,5 +44,13 @@
     "@types/lodash": "^4.14.116",
     "@types/node": "^8.0.47",
     "node-polyfill-webpack-plugin": "^4.1.0"
+  },
+  "oresLint": {
+    "note": "Declared, not installed. ores-lint resolves these from a global install - see .ores-lint/README.md",
+    "requires": {
+      "eslint": ">=9",
+      "typescript-eslint": ">=8 (optional; without it .ts files are skipped)"
+    },
+    "install": "npm i -g eslint typescript-eslint"
   }
 }
